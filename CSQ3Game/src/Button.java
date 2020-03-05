@@ -23,13 +23,13 @@ class Button {
 		this.glow = glow;
 	}
 
-	public void update(boolean[] mouse, Point mPos, boolean[] mouseReleased) {
-		if (mouseReleased[1] && mPos.inside(bounds)) {
+	public void update() {
+		if (InputManager.mouseReleased[1] && InputManager.mPos.inside(bounds)) {
 			clicked = true;
 		} else {
 			clicked = false;
 		}
-		if(mPos.inside(bounds) && glow) {
+		if(InputManager.mPos.inside(bounds) && glow) {
 			glowing = true;
 		}else {
 			glowing = false;

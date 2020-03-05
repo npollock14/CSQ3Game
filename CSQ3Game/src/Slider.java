@@ -20,14 +20,14 @@ public class Slider {
 		this.bh = bh;
 	}
 
-	public void update(boolean[] mouse, Point mPos, boolean[] mouseReleased) {
-		b.update(mouse, mPos, mouseReleased);
+	public void update() {
+		b.update();
 if(b.clicked || moving) {
-	b.bounds = new Rect(mPos.x - bw/2, pos.y - bh/2, bw, bh);
+	b.bounds = new Rect(InputManager.mPos.x - bw/2, pos.y - bh/2, bw, bh);
 	if(b.bounds.pos.x > pos.x + w - bw/2) b.bounds.pos.x = pos.x + w - bw/2;
 	if(b.bounds.pos.x < pos.x - bw/2) b.bounds.pos.x = pos.x - bw/2;
 	value = (((double)b.bounds.pos.x + bw/2 - (double)pos.x)/(double)w);
-	moving = mouse[1];
+	moving = InputManager.mouse[1];
 }
 
 	}

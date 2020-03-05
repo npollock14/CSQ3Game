@@ -1,6 +1,9 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -61,6 +64,8 @@ public class Driver extends JPanel
 	private void init() {
 		SceneManager.initManager();
 		SceneManager.initScenes(true);
+		
+//	Toolkit.getDefaultToolkit().beep();
 		
 	}
 
