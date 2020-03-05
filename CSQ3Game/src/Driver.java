@@ -111,7 +111,7 @@ public class Driver extends JPanel
 
 		frame.add(this);
 
-		t = new Timer(5, this);
+		t = new Timer(1, this);
 		t.start();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
