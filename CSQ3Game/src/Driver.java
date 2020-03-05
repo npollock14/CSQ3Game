@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class Driver extends JPanel
 		implements ActionListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
-	
+	static Font f = new Font("Press Start", 0, 48);
 	static int screenWidth = 1800;
 	static int screenHeight = 1000;
 
@@ -25,16 +26,17 @@ public class Driver extends JPanel
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-
+		SceneManager.draw(g);
 	}
 
 	public void update() throws InterruptedException {
+		SceneManager.update();
 
 		
 	}
 
 	private void init() {
-
+		SceneManager.scenes.add(new MenuScene());
 		
 	}
 
