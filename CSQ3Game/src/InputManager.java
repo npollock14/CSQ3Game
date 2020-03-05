@@ -11,6 +11,11 @@ public class InputManager {
 	static boolean resetMouseReleased = false;
 
 	public static void update() {
+		updateReleased();
+		
+	}
+
+	private static void updateReleased() {
 		if (resetMouseReleased) {
 			for (int i = 0; i < mouseReleased.length; i++) {
 				mouseReleased[i] = false;
@@ -23,9 +28,10 @@ public class InputManager {
 			}
 			resetKeysReleased = false;
 		}
+		
 	}
 
-	public static void updateKeyReleased(int e) {
+	public static void setKeyReleased(int e) {
 		keysReleased[e] = true;
 		resetKeysReleased = true;
 

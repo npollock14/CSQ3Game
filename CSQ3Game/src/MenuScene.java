@@ -12,6 +12,12 @@ public class MenuScene extends Scene {
 		
 		start.draw(g, 0, 0);
 		if (start.clicked) {
+			this.running = false;
+			this.drawing = false;
+			
+			SceneManager.gs.running = true;
+			SceneManager.gs.drawing = true;
+			
 			g.drawString("CLICK", Driver.screenWidth / 2, Driver.screenHeight / 2 + 500);
 		}
 

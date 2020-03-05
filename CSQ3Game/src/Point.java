@@ -6,6 +6,16 @@ public class Point {
 		this.y = y;
 	}
 
+	public Point() {
+		this.x = 0;
+		this.y = 0;
+	}
+
+	public void setXY(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public double distanceTo(Point p2) {
 		return Math.sqrt((this.x - p2.x) * (this.x - p2.x) + (this.y - p2.y) * (this.y - p2.y));
 	}
@@ -32,5 +42,9 @@ public class Point {
 
 	public boolean isSame(Point p) {
 		return p.x == this.x && p.y == this.y;
+	}
+
+	public String toString() {
+		return "(" + x + ", " + y + ")";
 	}
 }

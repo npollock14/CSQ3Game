@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,26 +20,47 @@ import javax.swing.Timer;
 public class Driver extends JPanel
 		implements ActionListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 	static Font f = new Font("Press Start", 0, 48);
+	static Font fs = new Font("Press Start", 0, 11);
 	static int screenWidth = 1800;
 	static int screenHeight = 1000;
-	MenuScene m = new MenuScene();
-
+	static Point windowLoc = new Point();
+	static JFrame frame;
+	ArrayList<Long> fps = new ArrayList<Long>();
+	long frameStart = 0;
+	//static boolean closeNormally = true;
+	
 	// ============== end of settings ==================
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics g) { //main paint
 		super.paintComponent(g);
 		SceneManager.draw(g);
+		
+		g.setFont(fs);
+		fps.add((long) (1 / ((System.nanoTime() - frameStart) / Math.pow(10, 9))));
+		if(fps.size() >= 60) {
+			fps.remove(0);
+		}
+		double sum = 0;
+		for(Long d : fps) {
+			sum += d;
+		}
+		double avg = sum/fps.size();
+		g.drawString((int)avg + "", screenWidth - 50, 25);
+		frameStart = System.nanoTime();
+		
 	}
 
-	public void update() throws InterruptedException {
+	public void update() throws InterruptedException { // main update
 		SceneManager.update();
-
+		windowLoc.setXY(frame.getLocation().x,frame.getLocation().y);
+		//System.out.println(windowLoc.toString());
+		
 		
 	}
 
 	private void init() {
-		SceneManager.scenes.add(m);
-		m.init();
+		SceneManager.initManager();
+		SceneManager.initScenes(true);
 		
 	}
 
@@ -77,22 +99,22 @@ public class Driver extends JPanel
 
 		init();
 
-		JFrame f = new JFrame();
-		f.setTitle("Name");
-		f.setSize(screenWidth, screenHeight);
-		f.setBackground(Color.BLACK);
-		f.setResizable(false);
-		f.addKeyListener(this);
-		f.addMouseMotionListener(this);
-		f.addMouseWheelListener(this);
-		f.addMouseListener(this);
+		frame = new JFrame();
+		frame.setTitle("CS Q3 Game");
+		frame.setSize(screenWidth, screenHeight);
+		frame.setBackground(Color.BLACK);
+		frame.setResizable(false);
+		frame.addKeyListener(this);
+		frame.addMouseMotionListener(this);
+		frame.addMouseWheelListener(this);
+		frame.addMouseListener(this);
 
-		f.add(this);
+		frame.add(this);
 
-		t = new Timer(14, this);
+		t = new Timer(5, this);
 		t.start();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 
 	}
 
@@ -106,7 +128,7 @@ public class Driver extends JPanel
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		InputManager.updateKeyReleased(e.getKeyCode());
+		InputManager.setKeyReleased(e.getKeyCode());
 	}
 
 	@Override
