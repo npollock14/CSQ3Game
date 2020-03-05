@@ -21,6 +21,7 @@ public class Driver extends JPanel
 	static Font f = new Font("Press Start", 0, 48);
 	static int screenWidth = 1800;
 	static int screenHeight = 1000;
+	MenuScene m = new MenuScene();
 
 	// ============== end of settings ==================
 	
@@ -36,7 +37,8 @@ public class Driver extends JPanel
 	}
 
 	private void init() {
-		SceneManager.scenes.add(new MenuScene());
+		SceneManager.scenes.add(m);
+		m.init();
 		
 	}
 
@@ -49,11 +51,13 @@ public class Driver extends JPanel
 
 		try {
 			InputManager.mPos = getMousePos();
+			
 			update();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		repaint();
+		InputManager.update();
 
 	}
 	public Point getMousePos() {
@@ -97,6 +101,7 @@ public class Driver extends JPanel
 	@Override
 	public void keyPressed(KeyEvent e) {
 		InputManager.keys[e.getKeyCode()] = true;
+		
 	}
 
 	@Override
@@ -106,17 +111,14 @@ public class Driver extends JPanel
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
 	}
 
 	@Override
@@ -137,7 +139,8 @@ public class Driver extends JPanel
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		InputManager.mouse[e.getButton()] = false;
-		// InputManager.mouseReleased[e.getButton()] = true;
+		InputManager.mouseReleased[e.getButton()] = true;
+		InputManager.resetMouseReleased = true;
 	}
 
 	@Override

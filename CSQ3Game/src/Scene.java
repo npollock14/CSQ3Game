@@ -4,6 +4,7 @@ public abstract class Scene {
 	
 	boolean running = true;
 	boolean drawing = true;
+	boolean init = false;
 	
 	public abstract void draw(Graphics g);
 	public abstract void update();

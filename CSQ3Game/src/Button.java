@@ -26,8 +26,6 @@ class Button {
 	public void update(boolean[] mouse, Point mPos, boolean[] mouseReleased) {
 		if (mouseReleased[1] && mPos.inside(bounds)) {
 			clicked = true;
-			//System.out.println("here");
-			mouseReleased[1] = false;
 		} else {
 			clicked = false;
 		}
